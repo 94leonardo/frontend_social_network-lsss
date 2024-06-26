@@ -7,10 +7,19 @@ export const Routing = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PrivateLayout />} />
-        <Route index element={<Login />} />
-        <Route path="login" element={<Login />} />
-        <Route path="registro" element={<Register />} />
+        {/* Cargamos los componentes de la ruta pública */}
+
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="registro" element={<Register />} />
+        </Route>
+
+        {/* Cargamos los componentes de la ruta privada */}
+        <Route path="/rsocial" element={<PrivateLayout />}>
+          <Route index element={<Feed />} />
+          <Route path="feed" element={<Fedd />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
