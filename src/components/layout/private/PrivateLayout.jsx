@@ -1,18 +1,19 @@
-
-import { Outlet } from "react-router-dom"
-import { HeaderPriv } from "./HeaderPriv"
+import { Outlet } from "react-router-dom";
+import { HeaderPriv } from "./HeaderPriv";
+import { Sidebar } from "./Sidebar";
 
 export const PrivateLayout = () => {
   return (
     <>
-      {/* LAYOUT */}
+      {/* Cavecera navegacion */}
       <HeaderPriv />
 
       {/* Contenido Principal */}
-      <section className='layout__content'>
+      <section className="layout__content">
         <Outlet />
       </section>
+      {/* Barra lateral*/}
+      <Sidebar />
     </>
-  )
-}
-
+  );
+};
