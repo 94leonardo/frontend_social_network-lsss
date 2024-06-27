@@ -5,22 +5,28 @@ export const Register = () => {
   // Usamos el hook personalizado useForm para cargar los datos del formulario
   const { form, changed } = useForm({});
 
-  //guardar en la base de datos
-
-  const saveUser = (e) => {
-    //para que se actualize el formulario
+  // Guardar un usuario en la BD
+  const saveUser = async (e) => {
+    // Prevenir que se actualice la pantalla
     e.preventDefault();
-    //Obtine los datos del formulario
+
+    // Obetner los datos del formulario
     let newUser = form;
 
-    //guardar usuario en la base de datos del api rest
-    const request = fetch(Global.url + "user/register", {
+    // Guardar usuario en la BD del API Backend
+    const request = await fetch(Global.url + "user/register", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    // Obtener la información retornada por la request
+    const data = await request.json();
+
+    console.log(data);
+ 
   };
 
   return (
@@ -31,7 +37,7 @@ export const Register = () => {
 
       {/* Formulario de Registro*/}
       <div className="content__posts">
-        <form className="register-form" onChange={saveUser}>
+        <form className="register-form" onSubmit={saveUser}>
           <div className="form-group">
             <label htmlFor="name">Nombres</label>
             <input type="text" name="name" required onChange={changed} />

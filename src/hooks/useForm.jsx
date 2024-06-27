@@ -10,7 +10,7 @@ export const useForm = (initialObj = {}) => {
       ...form,
       [name]: value,
     });
-    console.log(target);
+    
   };
   return { form, changed };
 };
