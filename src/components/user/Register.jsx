@@ -10,6 +10,7 @@ export const Register = () => {
   const saveUser = (e) => {
     //para que se actualize el formulario
     e.preventDefault();
+    //Obtine los datos del formulario
     let newUser = form;
 
     //guardar usuario en la base de datos del api rest
