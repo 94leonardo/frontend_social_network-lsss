@@ -1,3 +1,10 @@
+@media (max-width: 1365px) {
+  .layout {
+      grid-template-columns: 100% !important;
+  }
+
+}
+
 /* Contenedor principal */
 .container {
     display: flex;

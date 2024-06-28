@@ -62,7 +62,6 @@ body {
     width: 100%;
     height: 100%;
     max-height: 80rem;
-        
 }
 
 
@@ -140,6 +139,7 @@ body {
 .layout__content{
     grid-area: content;
     padding: 0 1.5rem;
+    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
 }
 
 .content__login{
@@ -155,7 +155,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-   
+    justify-content: center; /* Centrar horizontalmente */
 }
 
 .content__title, .aside__title{
@@ -437,3 +437,36 @@ button{
     font-size: 1.4rem;
 }
 
+.alert{
+    width: 50%;
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+}
+
+.alert-success{
+    background-color: #5cb85c;
+    border: 1px solid #0c8e0c;
+    color: white;
+}
+
+.alert-danger{
+    background-color: #f74c47;
+    border: 1px solid #ff192c;
+    color: white;
+}
+
+.form-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Limita el ancho del formulario */
+    padding: 2rem; /* Agrega algo de padding alrededor del formulario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: agrega una sombra */
+    border-radius: 10px; /* Opcional: redondea las esquinas */
+    background-color: #fff; /* Opcional: establece un color de fondo */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
