@@ -250,6 +250,14 @@ body {
     border-color: var(--color-border-btn-delete);
 }
 
+.post__button--green{
+    background-color: var(--color-background-btn-success);
+    border-color: var(--color-border-btn-success);
+}
+.post__button.post__button--green:hover{
+    background-color: var(--color-background-btn-success-hover);
+    border-color: var(--color-border-btn-success-hover);
+}
 
 .post__button:hover{
     background-color: var(--color-background-btn-delete-hover);
@@ -303,6 +311,14 @@ body {
     width: 7.5rem;
     height: 7.5rem;
     border-radius: 100rem;
+    margin-right: 1.5rem;
+    overflow: hidden;
+}
+
+.img-avatar-nav{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
     margin-right: 1.5rem;
     overflow: hidden;
 }
@@ -435,6 +451,7 @@ button{
     line-height: 1.5;
     cursor: pointer;
     font-size: 1.4rem;
+    margin: 4px;
 }
 
 .alert{
@@ -469,12 +486,4 @@ button{
     border-radius: 10px; /* Opcional: redondea las esquinas */
     background-color: #fff; /* Opcional: establece un color de fondo */
     margin: 0 auto; /* Centrar horizontalmente */
-}
-
-.img-avatar-nav{
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    margin-right: 1.5rem;
-    overflow: hidden;
 }

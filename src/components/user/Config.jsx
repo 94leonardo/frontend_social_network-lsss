@@ -112,7 +112,7 @@ export const Config = () => {
 
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
-              <input type="password" name="password" required />
+              <input type="password" name="password"/>
             </div>
 
             <div className="form-group">

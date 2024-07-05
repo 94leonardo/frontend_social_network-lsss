@@ -2,9 +2,11 @@
 import { Global } from "../../helpers/Global";
 import { useEffect, useState } from 'react';
 import useAuth from "../../hooks/useAuth";
-import { UserList } from './UserList';
+import { UserList } from "../user/UserList";
+import { useParams } from "react-router-dom";
 
-export const People = () => {
+
+export const Followers = () => {
 
   // Variable para almacenar el token para las peticiones a realizar en este componente
   const token = localStorage.getItem("token");
@@ -24,6 +26,9 @@ export const People = () => {
   // Estado para verificar si yo sigo a un usuario, para configurar la visualización de los botones "Seguir" y "Dejar de seguir"
   const [following, setFollowing] = useState([]);
 
+  // Usar desde el react-router-dom el Hook useParams para tener acceso a los parámetros que vienen en la url
+  const params = useParams();
+
   // Hook para ejecutar el método getUsers, se ejecuta la primera vez que se carga este componente
   useEffect(() => {
     getUsers(1);
@@ -32,9 +37,11 @@ export const People = () => {
   // Método para hacer la petición al Backend y obtener los usuarios que sigues
   const getUsers = async (nextPaginate = 1) => {
     try {
+      // Obtener el userId desde la url
+      const userId = params.userId;
 
       // Petición al Backend para obtener los usuarios que sigues desde la BD del API Backend - page actualiza la pagina a mostrar
-      const response = await fetch(Global.url + "user/list/" + nextPaginate, {
+      const response = await fetch(Global.url + "follow/followers/" + userId + "/" + nextPaginate, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,31 +52,30 @@ export const People = () => {
       // Obtener la información retornada por la request
       const data = await response.json();
 
+      // Recorrer y limpiar follows para quedarme con followed
+      let cleanUsers = [];
+      data.follows.forEach(follow => {
+        cleanUsers = [...cleanUsers, follow.following_user]
+      });
+      data.users = cleanUsers;
+
       // Usar la variable de estado para asignar el array de usuarios que sigues recibido
       if (data.users && data.status === "success") {
-
-        // Filtrar usuarios para excluir al usuario autenticado
-        const filteredUsers = data.users.filter(user => user._id !== auth._id);
-
-        let newUsers = filteredUsers;
+        let newUsers = data.users;
 
         if (users.length >= 1) {
-          newUsers = [...users, ...filteredUsers];
+          newUsers = [...users, ...data.users];
         }
-
         setUsers(newUsers);
-
 
         // Asignamos a la variable de estado following, el array de seguidores que me devolvió el backend
         setFollowing(data.users_following);
-
+  
         // Paginación. Comprobar si existen más usuarios para mostrar en la respuesta de la petición
         // (data.totalDocs - 5) porque el listado de usuarios ya tiene 5 usuarios en pantalla que no está contabilizando en user.length
-        if (users.length >= (data.totalDocs - 5)) {
+        if (users.length >= (data.total - 5)) {
           setMore(false);
         }
-
-
       }
     } catch (error) {
       console.error("Error en la petición al backend:", error);
@@ -79,7 +85,7 @@ export const People = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">Gente</h1>
+        <h1 className="content__title">Seguidores de {auth.name} {auth.last_name} </h1>
       </header>
 
       <UserList users={users}
